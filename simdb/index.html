@@ -1,0 +1,85 @@
+<!--#include file="header.html" -->
+<script>
+  sim.people.get_fsof(function(data) {
+    if (data.title)
+      $('#fsof_title').text(data.title + " ");
+
+    $('#fsof_firstname').text(data.firstname);
+    $('#fsof_lastname').text(data.lastname);
+
+    if (data.year) {
+      $('#fsof_year').text(data.year);
+      $('#fsof_year').parent().show();
+    }
+
+
+    if (data.home_city)
+      $('#fsof_home_city').text(data.home_city);
+    if (data.home_state)
+      $('#fsof_home_state').text(", " + data.home_state);
+    if (data.home_country)
+      $('#fsof_home_country').text(", " + data.home_country);
+
+    if (data.home_city || data.home_state || data.home_country)
+      $('#fsof_home_city').parent().parent().show();
+
+    if (data.homepage) {
+      $('#fsof_homepage').text(data.homepage);
+      $('#fsof_homepage').parent().show();
+    }
+
+    if (data.quote)
+      $('#fsof_quote').text(data.quote);
+  })
+</script>
+
+<h1 style="text-align: center; font-size: 40px"><span style="color:#777">SIMMONS/</span>DB</h1>
+<br />
+<marquee style="font-size: 30px">Welcome to the all new Simmons DB!</marquee>
+<br /><br /><br />
+
+<div class="row" style="margin:0">
+  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-4">
+    <div style="padding: 0; text-align: center; min-height: 100%; border: 1px solid rgb(221, 221, 221); border-radius: 10px; text-align: center; display: inline-block; width: 100%" class="jumbotron">
+      <div style="background-color: #6ABBFA; color: black; text-align: center; padding: 20px 20px 1px 20px; color: white; border-radius: 10px 10px 0 0;">
+        <h2 style="margin: 0; font-size: 22px">15 Seconds of Frame</h2>
+        <p class="text-muted" style="margin-top:0; color: #0054A7;font-size: 15px"><em>Simmons Hall Resident of the Moment</em></p>
+      </div>
+      <div style="padding: 10px 20px">
+        <h3 style="font-size: 22px"><span id="fsof_title"></span><span id="fsof_firstname"></span> <span id="fsof_lastname"></span></h3>
+     
+        <table style="width: 100%">
+          <tr style="display: none">
+            <td style="text-align: right; width: 50%">Year:&nbsp;&nbsp;</td>
+            <td style="text-align: left" id="fsof_year">2017</td>
+          </tr>
+          <tr style="display: none">
+            <td style="text-align: right; width: 50%">Hometown:&nbsp;&nbsp;</td>
+            <td style="text-align: left"><span id="fsof_home_city"></span><span id="fsof_home_state"><span id="fsof_home_country"></span></td>
+          </tr>
+          <!--tr>
+            <td style="text-align: right; width: 50%">Course:&nbsp;&nbsp;</td>
+            <td style="text-align: left">6-2</td>
+          </tr-->
+          <tr style="display: none">
+            <td style="text-align: right; width: 50%">URL:&nbsp;&nbsp;</td>
+            <td style="text-align: left;word-wrap:break-word" id="fsof_homepage"></td>
+          </tr>
+        </table>
+        <br />
+        <div style="text-align: center; padding: 0 15px;" id="fsof_quote">&nbsp;
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+  </div>
+</div>
+
+      
+
+<!--#include file="footer.html" -->

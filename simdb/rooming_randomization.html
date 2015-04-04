@@ -1,0 +1,96 @@
+<!--#include file="header.html" -->
+<script>
+
+$('#run_script').click(function () {
+  $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "perform", // URL of the Perl script
+      data: $("#createForm").serialize(),
+
+      // script call was successful 
+      // data contains the JSON values returned by the Perl script 
+      success: function(data){
+
+          $('div.form-group').each(function(){
+              $(this).removeClass('has-error');
+          });
+
+          if (data.error) { // script returned error
+              var myList = $('ul.msg-list').empty();
+
+              $.each(data.msg, function(key,item) {
+                  $("div."+key).addClass('has-error');
+                  $('<li>').text(item.errtxt).appendTo(myList);
+              });
+
+
+              $('div#create_createresult').html('some error').html(myList);
+              $('div#create_createresult').addClass("text-danger");
+
+              $("form#createForm input#createForm_submit").removeAttr('disabled');
+          } // if
+          else 
+          { // login was successful
+              //$('form#login_loginform').hide();
+              $('div#create_createresult').text(data.msg);
+              $('div#create_createresult').addClass("success");
+
+          } //else
+      } // success
+  }); // ajax
+});
+  
+</script>
+
+<h1 style="text-align: center; font-size: 30px"><span style="color:#777">SIMMONS/</span>ROOMING RANDOMIZATION</h1>
+<br />
+<br /><br /><br />
+
+<div class="row" style="margin:0">
+  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-4">
+    <div style="padding: 0; text-align: center; min-height: 100%; border: 1px solid rgb(221, 221, 221); border-radius: 10px; text-align: center; display: inline-block; width: 100%" class="jumbotron">
+      <div style="background-color: #6ABBFA; color: black; text-align: center; padding: 20px 20px 1px 20px; color: white; border-radius: 10px 10px 0 0;">
+        <h2 style="margin: 0; font-size: 22px">CSV Generator</h2>
+        <a href="https://github.com/simmons-tech/simrooming/blob/master/rooming-randomization/rooming-randomization.py" target="_blank"><p class="text-muted" style="margin-top:0; color: #0054A7;font-size: 15px"><em>Simmons Hall Rooming Randomization Script</em></p></a>
+      </div>
+      <div style="padding: 10px 20px">
+        <h3 style="font-size: 22px"><span id="fsof_title"></span><span id="fsof_firstname"></span> <span id="fsof_lastname"></span></h3>
+     
+          <form id="randomization_form"  enctype="multipart/form-data" method="post" action="https://simmons-dev.mit.edu/api/rooming/run_randomization">
+        <table style="width: 100%">
+          <tr>
+            <td style="text-align: right; width: 50%">Input CSV:&nbsp;&nbsp;</td>
+            <td style="text-align: left" id="fsof_year"><input id="fileInput" class="input-file" name="incsv" type="file"></td>
+          </tr>
+          <tr>
+            <td style="text-align: right; width: 50%">Random Seed:&nbsp;&nbsp;</td>
+            <td style="text-align: left" id="fsof_year"><input name="randomseed" type="text"></td>
+          </tr>
+          <!--tr>
+            <td style="text-align: right; width: 50%">Course:&nbsp;&nbsp;</td>
+            <td style="text-align: left">6-2</td>
+          </tr
+          <tr style="display: none">
+            <td style="text-align: right; width: 50%">URL:&nbsp;&nbsp;</td>
+            <td style="text-align: left;word-wrap:break-word" id="fsof_homepage"></td>
+          </tr>-->
+        </table>
+        <br />
+        <div id="run_script" style="text-align: center; padding: 0 15px;" id="fsof_quote">&nbsp;
+          <input type="submit" value="Run Script and Download CSV">
+        </div>
+          </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+  </div>
+</div>
+
+      
+
+<!--#include file="footer.html" -->

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
+    <!--script type="text/javascript" src="/directory/static/js/jquery.cookie.js"></script-->
+    <script type="text/javascript" src="https://simmons-dev.mit.edu/api/static/js/simmons-api.js"></script>
+    <script>
+      sim.init({
+        'clientid': 'ydKmEgtbosUeu6zE30VgnNeO2vmpzhvRLg5WkP4o'
+      });
+      sim.login();
+      sim.people.me(function (data) {
+        $('#my_username').text(data.username);
+      });
+    </script>
+
+    <title>Simmons Hall</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//simmons-dev.mit.edu/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="//simmons-dev.mit.edu/bootstrap/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="//simmons-dev.mit.edu/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+      html {
+        height: 100%;
+      }
+    	body {
+    		background-image: url("//simmons-dev.mit.edu/bootstrap/assets/img/bg.jpg");
+    		background-size: cover;
+        height: 100%;
+        margin-bottom: 0;
+        padding-bottom: 60px;
+    	}
+      body > .container {
+        padding: 75px 7px 10px;
+      }
+      .container {
+        width: 100%;
+        height: 100%;
+      }
+      .inner-container {
+        background-color: rgba(255,255,255,0.9);
+        padding: 15px;
+        height: 100%;
+        overflow-y: auto;
+      }
+      footer .container .text-muted {
+        margin: 0;
+        line-height: 60px;
+        display: inline-block;
+      }
+      #mit-logo {
+        margin-right: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/simdb">          
+            <img class="masthead-img" src="//simmons-dev.mit.edu/bootstrap/assets/img/logo_circle.png">
+            SIMMONS/<span class="sub">DB</span>
+          </a>
+        </div>
+        <style>
+          .dropdown-menu td {
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            text-align: center;
+            font-size: 20px;
+            vertical-align: middle;
+            padding-top: 20px;
+          }
+          .dropdown-menu td:hover {
+            background-color: #eee;
+          }
+          .dropdown-menu td a {
+            color: black;
+          }
+          .dropdown-menu td a:hover {
+            text-decoration: none;            
+          }
+          .dropdown-menu td i {
+            font-size: 40px;
+            color: #25AAE1;
+          }
+          .dropdown-menu td div {
+            font-size: 20px;
+          }
+        </style>
+        <div id="navbar" class="collapse navbar-collapse">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" data-target="#"  data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false" role="button"  id="navgrid" style="padding-top: 0px; padding-bottom: 0px; line-height: 65px; font-size: 24px;"><i class="glyphicon glyphicon-th"></i></a>
+              <div style="text-align: center; padding: 30px" class="dropdown-menu" role="menu" aria-labelledby="navgrid">
+               <table style="widtH: 369px" >
+                <tr>
+                  <td><a href="index.html"><i style="color: #25AAE1"class="glyphicon glyphicon-home"></i><div>Home</div></a></td>
+                  <td><a href="directory.html"><i style="color: #FDD408"class="glyphicon glyphicon-book"></i><div>Directory</div></a></td>
+                  <td><a href="olddb.html"><i style="color: #5AB16E"class="glyphicon glyphicon-time"></i><div>Old DB</div></a></td>
+                </tr>
+                <tr>
+                  <td><a href="govtracker.html"><i style="color: #FDD408"class="glyphicon glyphicon-tasks"></i><div>GovTracker</div></a></td>
+                  <td><a href="medlinks.html"><i style="color: #E7505C" class="glyphicon glyphicon-plus-sign"></i><div>Medlinks</div></a></td>
+                  <td><a href="grts.html"><i style="color: #5AB16E" class="glyphicon glyphicon-heart"></i><div>GRTs</div></a></td>
+                </tr>
+                <tr>
+                  <td><a href="guestlist.html"><i style="color: #5AB16E"class="glyphicon glyphicon-list-alt"></i><div>Guest List</div></a></td>
+                  <td><a href="packages.html"><i style="color: #FDD408"class="glyphicon glyphicon-inbox"></i><div>Packages</div></a></td>
+                  <td><a href="mailto:simmons-tech@mit.edu"><i style="color: #25AAE1"class="glyphicon glyphicon-earphone"></i><div>Contact Tech</div></a></td>
+                </tr>
+               </table> 
+              </div>
+            </li>          
+            <li><a href="#" id="my_username"></a></li>
+            <!--<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>-->
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <!-- Begin page content -->
+    <div class="container"><div class="inner-container">
