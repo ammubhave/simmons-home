@@ -7,17 +7,43 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
+    <link href='//fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <!--script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script-->
     <!--script type="text/javascript" src="/directory/static/js/jquery.cookie.js"></script-->
-    <script type="text/javascript" src="https://simmons-dev.mit.edu/api/static/js/simmons-api.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://simmons-dev.mit.edu/api/static/js/simmons-api.js"></script>
     <script>
-      sim.init({
-        'clientid': 'ydKmEgtbosUeu6zE30VgnNeO2vmpzhvRLg5WkP4o'
+      $(function() {
+        sim.init({
+          'clientid': 'ydKmEgtbosUeu6zE30VgnNeO2vmpzhvRLg5WkP4o'
+        });
+        sim.login();
+        sim.people.me(function (data) {
+          $('#my_username').text(data.username);
+          $('.my_title').text(data.title);
+          $('.my_firstname').text(data.firstname);
+          $('.my_lastname').text(data.lastname);
+          $('.my_homecity').text(data.home_city);
+          $('.my_homestate').text(data.home_state);
+          $('.my_homecountry').text(data.home_country);
+          $('.my_homepage').text(data.homepage);
+          $('.my_lounge').text(data.lounge);
+          $('.my_room').text('Room ' + data.room);
+          $('.my_email').text(data.username + '@mit.edu');
+        });
+        sim.packages.notify(function (data) {
+          if (data.count > 0) {
+            var packages_txt = 'package';
+            if (data.count > 1) packages_txt += 's';
+            post_notification('You have ' + data.count + ' new ' + packages_txt + '.', 'The oldest one has been there since ' + data.oldest_since + '. Please pick it up at your earliest convenience.');
+          }
+        });
       });
-      sim.login();
-      sim.people.me(function (data) {
-        $('#my_username').text(data.username);
-      });
+
+      function post_notification(title, body) {
+        $('#nonewnotifications').text('Notifications');
+        $('#nonewnotifications').after($('<div class="list-group"><a href="#" class="list-group-item"><h4 class="list-group-item-heading">' + title + '</h4><p class="list-group-item-text">' + body + '</p></a></div>'));
+      }
     </script>
 
     <title>Simmons Hall</title>
@@ -38,19 +64,27 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//simmons-dev.mit.edu/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="//simmons-dev.mit.edu/bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
+
     <style>
       html {
         height: 100%;
       }
-    	body {
-    		background-image: url("//simmons-dev.mit.edu/bootstrap/assets/img/bg.jpg");
-    		background-size: cover;
+      body {
+        /*background-image: url("//simmons-dev.mit.edu/bootstrap/assets/img/bg.jpg");
+        background-size: cover;*/
+        background-color: white;
         height: 100%;
         margin-bottom: 0;
         padding-bottom: 60px;
-    	}
+      }
       body > .container {
-        padding: 75px 7px 10px;
+        padding: 112px 0 10px ;/*75pc 7px 10px;*/
       }
       .container {
         width: 100%;
@@ -58,7 +92,7 @@
       }
       .inner-container {
         background-color: rgba(255,255,255,0.9);
-        padding: 15px;
+       /* padding: 15px;*/
         height: 100%;
         overflow-y: auto;
       }
@@ -67,17 +101,290 @@
         line-height: 60px;
         display: inline-block;
       }
+
+      .footer {font-size:.9em;color:#777;opacity:0.4;transition:all .4s; z-index: 50;}
+      .footer:hover {opacity:1}
+
+
       #mit-logo {
         margin-right: 20px;
       }
+      .navbar-brand {
+        padding: 0;
+      }
+      .navbar {
+        margin-bottom: 0;
+      }
+      #real-navbar-center {
+        float: left;
+        height: 65px;
+        margin-left: 50px;
+        width: 539px;
+      }
+      .ui-autocomplete {
+        z-index: 7000;
+      }
+
+      .topbar {
+        border-bottom: solid 1px #ddd;
+        font-size: 20px;
+        height: 46px;
+        background-color: white;
+      }
+      .topbar .nav {
+        /*margin-left: 200px;*/
+        font-size: 16px;
+      }
+      .topbar .nav > li {
+        /*margin-left: 200px;*/
+        /*padding-right: 15px;*/
+      }
+      .topbar .nav > li > a {
+        padding: 13px 20px 12px;
+        /*margin-left: 200px;*/
+        /*padding-right: 15px;*/
+      }
+      .topbar-title {
+        display: block;
+        color: #e43947;
+        float: left;
+        padding: 8px 15px;
+        width: 250px;
+        border-right: solid 1px #ddd;
+        text-align: center;
+      }
+      .topbar-title:hover {
+        background-color: #fafafa;
+        text-decoration: none;
+        color: #e43947;
+        cursor: auto;
+        cursor: pointer;
+      }
     </style>
+
+    <style>
+      .dropdown-menu {
+        margin: 0;
+        padding-top: 10px;
+      }
+      .dropdown-menu li {
+        width: 250px;
+        text-align: center;
+        font-size: 15px;
+      }
+      .dropdown-menu>li>a {
+        font-size: 20px;
+        color: #e43947;
+        padding: 8px 15px;
+      }
+      .dropdown-menu>li>a:hover {
+        background-color: #f5f5f5;
+        color: #e43947;
+      }
+      /*.dropdown-menu td {
+        display: inline-block;
+        width: 120px;
+        height: 120px;
+        text-align: center;
+        font-size: 20px;
+        vertical-align: middle;
+        padding-top: 20px;
+      }
+      .dropdown-menu td:hover {
+        background-color: #eee;
+      }
+      .dropdown-menu td a {
+        color: black;
+      }
+      .dropdown-menu td a:hover {
+        text-decoration: none;
+      }
+      .dropdown-menu td i {
+        font-size: 40px;
+        color: #25AAE1;
+      }
+      .dropdown-menu td div {
+        font-size: 20px;
+      }*/
+
+.president .color,
+.athletics_chair .color,
+.frosh_1 .color,
+.frosh_2 .color,
+.publicity_chair .color { background-color: #92BFFF; } /* blue */
+
+.house_chair .color,
+.rooming_chair_1 .color,
+.rooming_chair_2 .color,
+.history_chair .color,
+.social_chair .color,
+.technology_chair .color { background-color: #FFE57F; } /* yellow */
+
+.treasurer    .color { background-color: #99CC99; } /* green */
+.secretary    .color { background-color: #FF8C92; } /* red */
+
+.facilities_chair .color,
+.ee_lab_chair .color,
+.workshop_chair .color,
+.library_chair .color,
+.entertainment_chair .color,
+.reservations_chair .color { background-color: #CCB2E5; } /* purple */
+
+.housemaster .color,
+.associate_housemaster .color,
+.rlad .color,
+.house_manager .color { background-color: #7F7F7F; } /* gray */
+
+.desk_captain .color { background-color: #DDDDDD; } /* white */
+
+.box .color {
+  /*position: absolute;
+  top: 0px; left: 0px;*/
+  width: 100%; height: 100px;
+  z-index: 1000;
+}
+
+.photo {
+  position: relative;
+  top: -80px; /*left: 40px;*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 120px; width: 120px;
+  border-radius: 60px;
+  z-index: 1001;
+}
+
+.box .description {
+  position: absolute;
+  top: 30px;
+  left: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 480px;
+  height: 360px;
+  margin: 0px;
+  border-left: solid 1px #DDDDDD;
+}
+
+.box .role {
+  position: absolute;
+  top: 55px; left: 240px;
+  width: 100%;
+  text-align: left;
+  font-size: 28px;
+  color: #222;
+}
+
+.box .persons-info {
+  position: relative;
+  top: -20px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.box .person-info {
+  position: relative;
+  display: block;
+  padding-bottom: 20px;
+}
+
+.box .description .scrollable {
+  padding: 0px 40px 30px 40px
+}
+
+.box a {
+  margin: 0; /* override */
+}
+
+.box .name {
+  font-weight: 700;
+  font-size: large;
+}
+
+.box .email {
+  font-size: large;
+}
+
+.box .name, .box .phone, .box .email {
+  position: relative;
+  display: block;
+  margin: 0px 0px 7px 0px;
+}
+    </style>
+
+    <script>
+      function show_profile(username) {
+        $('.user-profile-modal').modal('show');
+        $('.person-info .name').text('');
+        $('.person-info .email').html('');
+  $('.person-info .quote').text('');
+  $('.person-info .room').text('');
+        sim.people.get(username, function(data) {
+          if (data.title == null) data.title = '';
+          $('.person-info .name').html('<em>' + $('<span>').text(data.title).html() + '</em> ' + $('<span>').text(data.firstname + ' ' + data.lastname).html());
+          $('.person-info .email').html('<a href="mailto:' + data.email + '">' + data.email + '</a>');
+
+          if (data.quote)
+            $('.person-info .quote').parent().show();
+          else
+            $('.person-info .quote').parent().hide();
+
+          $('.person-info .quote').text(data.quote);
+          $('.person-info .room').text(data.room);
+          $('.person-info .year').text(data.type + ' ' + (data.year && data.year != 'None' ? data.year : ''));
+          $('.person-info .lounge').text(data.lounge);
+        });
+      }
+    </script>
   </head>
 
   <body>
 
+    <div class="modal fade user-profile-modal" tabindex="-1" role="dialog" aria-labelledby="userProfileModalLabel" aria-hidden="true" style="">
+      <div class="modal-dialog" style="width: 500px">
+        <div class="modal-content">
+          <div class="modal-header" style="height: 100px; background-color: #92BFFF">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">&nbsp;</h4>
+          </div>
+          <div class="modal-body">
+           <img class="photo" src="../img/photos/photo.jpg">
+            <div class="box">
+              <div class="persons-info" style="text-align: center">
+                <div class="person-info">
+                  <div class="name"></div>
+                  <div class="email"><a href="#"></a></div>
+      <br />
+        <table  class="table table-bordered" style="text-align: left">
+      <tr>
+        <td style="width: 100px">Room</td>
+        <td class="room"></td>
+      </tr>
+      <tr>
+        <td>Year</td>
+        <td class="year"></td>
+      </tr>
+      <tr>
+        <td>Lounge</td>
+        <td class="lounge"></td>
+      </tr>
+      <tr>
+        <td class="quote" colspan="2"></td>
+      </tr>
+            </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+    <nav class="navbar-fixed-top" id="real-topbar">
+      <div class="container navbar navbar-default" style="height: 66px">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -85,63 +392,65 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/simdb">          
+          <a class="navbar-brand" href="/simdb">
             <img class="masthead-img" src="//simmons-dev.mit.edu/bootstrap/assets/img/logo_circle.png">
             SIMMONS/<span class="sub">DB</span>
           </a>
         </div>
+
+        <div id="real-navbar-center">
+
+        </div>
+
+
+      <ul class="dropdown-menu" aria-labelledby="mainnavdrop">
+        <li>Simmons DB</li>
+        <li role="separator" class="divider"></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="directory.html">Directory</a></li>
+        <li><a href="officers.html">Officers</a></li>
+        <li role="separator" class="divider"></li>
+        <li>Personal Info</li>
+        <li role="separator" class="divider"></li>
+        <li><a href="myprofile.html">My Profile</a></li>
+        <li><a href="guestlist.html">Guest List</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="olddb.html">Old DB</a></li>
+        <li role="separator" class="divider"></li>
+      </ul>
+
         <style>
-          .dropdown-menu td {
-            display: inline-block;
-            width: 120px;
-            height: 120px;
-            text-align: center;
-            font-size: 20px;
-            vertical-align: middle;
-            padding-top: 20px;
-          }
-          .dropdown-menu td:hover {
-            background-color: #eee;
-          }
-          .dropdown-menu td a {
-            color: black;
-          }
-          .dropdown-menu td a:hover {
-            text-decoration: none;            
-          }
-          .dropdown-menu td i {
-            font-size: 40px;
-            color: #25AAE1;
-          }
-          .dropdown-menu td div {
-            font-size: 20px;
+          .list-group {
+            box-shadow: 2px 2px 10px #888888;
+            margin-bottom: 0;
+            margin-top: 20px;
           }
         </style>
         <div id="navbar" class="collapse navbar-collapse">
-
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" data-target="#"  data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false" role="button"  id="navgrid" style="padding-top: 0px; padding-bottom: 0px; line-height: 65px; font-size: 24px;"><i class="glyphicon glyphicon-th"></i></a>
+            <!--li>
+              <a href="#" data-target="#"  data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false" role="button"   style="padding-top: 0px; padding-bottom: 0px; line-height: 65px; font-size: 24px;"><i class="glyphicon glyphicon-bell"></i></a>
+              <div style="padding: 30px; width: 400px; background-color: #ddd" class="dropdown-menu" role="menu" aria-labelledby="navnotifications">
+                <div id="nonewnotifications" style="text-align: center; font-size: large">There are no new notifications</div>
+              </div>
+            </li-->
+            <!--li><a href="#" data-target="#"  data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false" role="button"  id="navgrid" style="padding-top: 0px; padding-bottom: 0px; line-height: 65px; font-size: 24px;"><i class="glyphicon glyphicon-th"></i></a>
               <div style="text-align: center; padding: 30px" class="dropdown-menu" role="menu" aria-labelledby="navgrid">
-               <table style="widtH: 369px" >
+               <table style="width: 369px" >
                 <tr>
                   <td><a href="index.html"><i style="color: #25AAE1"class="glyphicon glyphicon-home"></i><div>Home</div></a></td>
                   <td><a href="directory.html"><i style="color: #FDD408"class="glyphicon glyphicon-book"></i><div>Directory</div></a></td>
                   <td><a href="olddb.html"><i style="color: #5AB16E"class="glyphicon glyphicon-time"></i><div>Old DB</div></a></td>
                 </tr>
                 <tr>
-                  <td><a href="govtracker.html"><i style="color: #FDD408"class="glyphicon glyphicon-tasks"></i><div>GovTracker</div></a></td>
-                  <td><a href="medlinks.html"><i style="color: #E7505C" class="glyphicon glyphicon-plus-sign"></i><div>Medlinks</div></a></td>
-                  <td><a href="grts.html"><i style="color: #5AB16E" class="glyphicon glyphicon-heart"></i><div>GRTs</div></a></td>
-                </tr>
-                <tr>
                   <td><a href="guestlist.html"><i style="color: #5AB16E"class="glyphicon glyphicon-list-alt"></i><div>Guest List</div></a></td>
-                  <td><a href="packages.html"><i style="color: #FDD408"class="glyphicon glyphicon-inbox"></i><div>Packages</div></a></td>
+                  <td><a href="govtracker.html"><i style="color: #FDD408"class="glyphicon glyphicon-tasks"></i><div>GovTracker</div></a></td>
                   <td><a href="mailto:simmons-tech@mit.edu"><i style="color: #25AAE1"class="glyphicon glyphicon-earphone"></i><div>Contact Tech</div></a></td>
                 </tr>
-               </table> 
+               </table>
               </div>
-            </li>          
-            <li><a href="#" id="my_username"></a></li>
+            </li-->
+            <li><a href="myprofile.html" id="my_username"></a></li>
             <!--<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -158,7 +467,10 @@
 
         </div><!--/.nav-collapse -->
       </div>
+
     </nav>
 
+
+
     <!-- Begin page content -->
-    <div class="container"><div class="inner-container">
+    <div class="container" style="box-shadow: 0px 0px 10px #DDD; position: relative;"><div class="inner-container">

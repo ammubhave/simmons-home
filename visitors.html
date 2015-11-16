@@ -1,116 +1,43 @@
-<!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
+<!--#set var="name" value="visitors" -->
+<!--#include virtual="/header.html" -->
 
-  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
-       More info: h5bp.com/i/378 -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+          <a id="tours"></a>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text">
+                <h4>Tours</h4>
+                  <p>In recognition of the architectural significance of
+                  Simmons Hall, we offer tours of the non-residential areas of the
+                  building. A tour of Simmons Hall usually takes 45 to 75 minutes,
+                  depending upon the interests of the tour group. The maximum tour
+                  group size is 20 people, however, given enough notice, Simmons may
+                  be able to arrange for additional guides to accommodate larger
+                  groups.</p>
 
-  <title>Simmons Hall</title>
-  <meta name="description" content="">
+                  <p>There is a small fee charged for tours. This is sometimes waived,
+                  as is the case for members of the MIT community, MIT alums and
+                  special guests of MIT. For business-related tours, we ask for a
+                  donation.</p>
 
-  <!-- Mobile viewport optimized: h5bp.com/viewport -->
-   <meta name="viewport" content="width=device-width">
+                  <p>As our tour guides are students, we are unfortunately unable to offer tours outside of the regular academic calendar - including during the summer (May through August) or around the holidays (December through January). Please take this into account when submitting a tour request. We look forward to seeing you!</p>
+              </div>
+              <div class="mdl-card__actions">
+                <a href="mailto:simmons-tours@mit.edu" class="mdl-button">Contact simmons-tours@mit.edu
+                for more information</a>
+              </div>
+            </div>
+          </section>
+          <a id="rse"></a>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text">
+                <h4>Residential Scholar Events</h4>
+                <p>Join us for a Simmons Residential Scholar Event.</p>
+              </div>
+              <div class="mdl-card__actions">
+                <a href="scholars.html" class="mdl-button">Additional Information</a>
+              </div>
+            </div>
+          </section>
 
-  <!-- Place favicon.ico and apple-touch-icon.png in the root
-  directory: mathiasbynens.be/notes/touch-icons -->
-<link href="favicon.png" rel="icon" type="image/x-icon" />
-
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
-
-  <!-- All JavaScript at the bottom, except this Modernizr build.
-       Modernizr enables HTML5 elements & feature detects for optimal performance.
-       Create your own custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.5.3.min.js"></script>
-</head>
-<body>
-  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
-       chromium.org/developers/how-tos/chrome-frame-getting-started -->
-  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-  <img class="bg" src="img/bg.jpg" alt="" />
-  <header>
-    <h1>
-      <a href="/"><img id="simmons-logo" src="img/logo.png"
-      alt="Simmons Hall" title="Simmons Hall" /></a>
-    </h1>
-    <nav>
-      <ul>
-	<li><a href="about.html">About</a></li>
-	<li><a href="prospectives.html">Prospectives</a></li>
-	<li class="active"><a href="visitors.html">Visitors</a></li>
-	<li><a href="simdb/">Residents</a></li>
-      </ul>
-    </nav>
-  </header>
-  <div role="main" id="content" class="container">
-    <h1>Visitors</h1>
-
-    <h2>Tours</h2> 
-    <p>In recognition of the architectural significance of
-    Simmons Hall, we offer tours of the non-residential areas of the
-    building. A tour of Simmons Hall usually takes 45 to 75 minutes,
-    depending upon the interests of the tour group. The maximum tour
-    group size is 20 people, however, given enough notice, Simmons may
-    be able to arrange for additional guides to accommodate larger
-    groups.</p>
-
-    <p>There is a small fee charged for tours. This is sometimes waived,
-    as is the case for members of the MIT community, MIT alums and
-    special guests of MIT. For business-related tours, we ask for a
-    donation.</p>
-
-    <p>Please
-    contact <a href="mailto:simmons-tours@mit.edu">simmons-tours@mit.edu</a>
-    for more information.</p>
-
-    <h2>Residential Scholar Events</h2>
-    <p>Join us for a Simmons Residential Scholar Event. <a href="/rs/"> More info</a></p>
-    
-  </div>
-  <footer>
-    <a href="http://mit.edu"><img id="mit-logo" alt="MIT Logo"
-  src="img/mitWhite.gif" /></a>
-    <span id="credit">Designed by Simmons Tech<br />&copy; 2012 Simmons Hall</span>
-    <div  id="street-address" class="adr">
-      <address class="vcard">
-	<a href="http://maps.google.com/maps?q=Simmons+Hall,+MIT&amp;hl=en&amp;sll=37.0625,-95.677068&amp;sspn=62.74193,129.550781&amp;oq=simmons+hall,+massa&amp;t=v&amp;hnear=Simmons+Hall,+Mid-Cambridge,+Massachusetts+02139&amp;z=17&amp;iwloc=A">
-	  <span class="street-address">229 Vassar St.</span>
-	  <span class="locality">Cambridge</span>,  
-	  <span class="region">MA</span>&nbsp;
-	  <span class="postal-code">02139</span>&nbsp;
-	</a>
-      </address>
-    </div>
-  </footer>
-
-
-  <!-- JavaScript at the bottom for fast page loading -->
-
-  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
-
-  <!-- scripts concatenated and minified via build script -->
-  <script src="js/plugins.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/bootstrap.js"></script>
-  <!-- end scripts -->
-
-  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
-       mathiasbynens.be/notes/async-analytics-snippet -->
-  <script>
-    var _gaq=[['_setAccount','UA-29172658-1'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
-  </script>
-</body>
-</html>
+<!--#include virtual="/footer.html" -->

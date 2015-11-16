@@ -1,52 +1,20 @@
 <!--#include file="header.html" -->
 <script>
 
-$('#run_script').click(function () {
-  $.ajax({
-      type: "POST",
-      dataType: "json",
-      url: "perform", // URL of the Perl script
-      data: $("#createForm").serialize(),
-
-      // script call was successful 
-      // data contains the JSON values returned by the Perl script 
-      success: function(data){
-
-          $('div.form-group').each(function(){
-              $(this).removeClass('has-error');
-          });
-
-          if (data.error) { // script returned error
-              var myList = $('ul.msg-list').empty();
-
-              $.each(data.msg, function(key,item) {
-                  $("div."+key).addClass('has-error');
-                  $('<li>').text(item.errtxt).appendTo(myList);
-              });
-
-
-              $('div#create_createresult').html('some error').html(myList);
-              $('div#create_createresult').addClass("text-danger");
-
-              $("form#createForm input#createForm_submit").removeAttr('disabled');
-          } // if
-          else 
-          { // login was successful
-              //$('form#login_loginform').hide();
-              $('div#create_createresult').text(data.msg);
-              $('div#create_createresult').addClass("success");
-
-          } //else
-      } // success
-  }); // ajax
-});
-  
 </script>
 
 <h1 style="text-align: center; font-size: 30px"><span style="color:#777">SIMMONS/</span>ROOMING RANDOMIZATION</h1>
-<br />
-<br /><br /><br />
 
+          Create a csv file named "in.csv" with the following format:<br/>
+            - Column 1 has names of students in any format you wish.<br />
+            - Column 2 has years matching the format specified in YEARS_ORDER below.<br />
+
+        YEARS_ORDER = ["Junior", "Sophomore", "Incoming Sophomore", "Freshman", "Incoming Freshman"]
+<br /><br />
+Agree upon a randomly chosen seed: chosen with witnesses or from
+               an agreed-upon external source of randomness (day's lottery numbers...). Make a record of the seed used.
+            By choosing this seed, the randomization process can be repeated and code
+               verified by interested third parties. <br />
 <div class="row" style="margin:0">
   <div class="col-md-4">
 
@@ -55,7 +23,7 @@ $('#run_script').click(function () {
     <div style="padding: 0; text-align: center; min-height: 100%; border: 1px solid rgb(221, 221, 221); border-radius: 10px; text-align: center; display: inline-block; width: 100%" class="jumbotron">
       <div style="background-color: #6ABBFA; color: black; text-align: center; padding: 20px 20px 1px 20px; color: white; border-radius: 10px 10px 0 0;">
         <h2 style="margin: 0; font-size: 22px">CSV Generator</h2>
-        <a href="https://github.com/simmons-tech/simrooming/blob/master/rooming-randomization/rooming-randomization.py" target="_blank"><p class="text-muted" style="margin-top:0; color: #0054A7;font-size: 15px"><em>Simmons Hall Rooming Randomization Script</em></p></a>
+        <a href="https://github.com/ammubhave/simmons-base/blob/master/api_server/rooming/views.py" target="_blank"><p class="text-muted" style="margin-top:0; color: #0054A7;font-size: 15px"><em>Simmons Hall Rooming Randomization Script</em></p></a>
       </div>
       <div style="padding: 10px 20px">
         <h3 style="font-size: 22px"><span id="fsof_title"></span><span id="fsof_firstname"></span> <span id="fsof_lastname"></span></h3>
@@ -84,6 +52,7 @@ $('#run_script').click(function () {
           <input type="submit" value="Run Script and Download CSV">
         </div>
           </form>
+          
       </div>
     </div>
   </div>

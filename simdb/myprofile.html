@@ -1,0 +1,176 @@
+<!--#include file="header.html" -->
+
+<script>
+$(function() {
+  $('.edit-icon').click(function() {
+    console.log($(this).parent().prev());
+    $(this).parent().prev().html($('<input style="width: 100%">').val($(this).parent().prev().text()));
+  });
+});
+
+function load_packages() {
+  sim.packages.notify(function (data) {
+    $('#package_text').text('You have ' + data.count + ' package(s) waiting at the desk.')
+  });
+}
+
+function load_guestlist() {
+  sim.guestlist.me(function (data) {
+    $('#guestlist_text').empty();
+    for (var i=0; i < data.length; i++) {
+      $('#guestlist_text').append(
+        $('<tr>').append($('<th scope="row">').text(i + 1))
+                 .append($('<td>').text(data[i]))
+                 .append($('<td>')
+                    .append('<i class="glyphicon glyphicon-remove remove-guest-icon">')));
+    }
+  });
+}
+</script>
+
+<style>
+body {
+    background-color: #F7F7F7;
+}
+.inner-container {
+    background-color: #F7F7F7;
+}
+
+.horz {
+    position: relative;
+    width: 100%;
+}
+
+.middle {
+    background-color: #F7F7F7;
+}
+
+.middle .content {
+    padding: 24px 0px;
+    width: 800px;
+}
+.content {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    border-top-color: #e43947;
+}
+.nav-tabs>li>a {
+    border-radius: 0;
+}
+
+.remove-guest-icon:hover {
+  cursor: pointer;
+  color: red;
+}
+.remove-guest-icon {
+  color: #e43947;
+}
+.edit-icon:hover {
+  cursor: pointer;
+  color: #666;
+}
+.edit-icon {
+  color: #000;
+}
+</style>
+
+ <div class="topbar" style="display: none">
+    <a id="mainnavdrop" class="topbar-title" data-toggle="dropdown">My Profile</a>
+ </div>
+
+
+<div class="horz middle">
+  <div class="content">
+
+
+<div style="margin: 0 25px 25px 25px; border: 1px solid #ddd; background-color: white">
+
+<ul id="myTabs" class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true">Profile</a></li>
+      <li role="presentation"><a href="#guestlist" role="tab" id="guestlist-tab" data-toggle="tab" aria-controls="guestlist" aria-expanded="true" onclick="$('#guestlist_text').html('<img src=\'http://4theirlives.com/wp-content/plugins/ajax-contact/images/ajax-loading.gif\' />'); load_guestlist()">Guest List</a></li>
+      <li role="presentation"><a href="#packages" role="tab" id="packages-tab" data-toggle="tab" aria-controls="packages" aria-expanded="true" onclick="$('#package_text').html('<img src=\'http://4theirlives.com/wp-content/plugins/ajax-contact/images/ajax-loading.gif\' />'); load_packages()">Packages</a></li>
+    </ul>
+
+    <div id="myTabContent" class="tab-content">
+      <div role="tabpanel" class="tab-pane fade active in" id="profile" aria-labelledby="profile-tab">
+
+        <div style="float: left; width: 200px;">
+
+          <div class="modal-header" style="height: 100px; background-color: #92BFFF;">
+
+          </div>
+          <div class="modal-body">
+           <img class="photo" src="../img/photos/photo.jpg">
+          </div>
+
+          </div>
+          <div style="margin-left: 200px;">
+              <div class="modal-header" style="height: 100px; background-color: #92BFFF;">
+                <h4 style="font-size: 24px" class="modal-title" id="exampleModalLabel"><span class="my_title"></span>&nbsp;<span class="my_firstname"></span>&nbsp;<span class="my_lastname"></span></h4>
+                <span class="my_room" style="font-weight: bold"></span><br />
+                <span class="my_email"></span>
+              </div>
+<br />
+              <table class="table" style="text-align: left; margin-right: 20px;">
+                <tbody>
+                <tr>
+                  <td style="width: 100px">Lounge</td>
+                  <td class="my_lounge"></td>
+                  <td style="width: 20px"></td>
+                </tr>
+                <tr>
+                  <td>URL</td>
+                  <td class="my_homepage"></td>
+                  <td style="width: 20px"><i class="edit-icon glyphicon glyphicon-pencil"></i></td>
+                </tr>
+                <tr>
+                  <td>Hometown</td>
+                  <td><span class="my_homecity"></span> <span class="my_homestate"></span> <span class="my_homecountry"></span></td>
+                  <td style="width: 20px"><i class="edit-icon glyphicon glyphicon-pencil"></i></td>
+                </tr>
+                <tr>
+                  <td class="quote" colspan="2">Three Rings for the Elven-kings under the sky,
+          Seven for the Dwarf-lords in their halls of stone,
+          Nine for Mortal Men doomed to die,
+          One for the Dark Lord on his dark throne
+          In the Land of Mordor where the Shadows lie.
+          One Ring to rule them all, One Ring to find them,
+          One Ring to bring them all and in the darkness bind them
+          In the Land of Mordor where the Shadows lie.</td>
+                  <td style="width: 20px"><i class="edit-icon glyphicon glyphicon-pencil"></i></td>
+                </tr>
+                      </tbody>
+              </table>
+          </div>
+<div style="clear:both"></div>
+      </div>
+      <div role="tabpanel" class="tab-pane fade in" id="guestlist" aria-labelledby="guestlist-tab" style="padding: 25px;">
+        <table class="table table-striped" style="width: 400px; margin: auto">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name (Last, First)</th>
+              <th style="width: 40px"></th>
+            </tr>
+          </thead>
+          <tbody id="guestlist_text">
+          </tbody>
+        </table>
+      </div>
+      <div role="tabpanel" class="tab-pane fade in" id="packages" aria-labelledby="packages-tab" style="padding: 25px">
+        <p id="package_text" style="text-align: center; font-size: large"></p>
+      </div>
+    </div>
+
+    </div>
+
+</div>
+</div>
+    <!--
+<iframe style="border: 0; width: 100%; height: 100%" src="https://simmons.mit.edu/sds/directory/update.php"></iframe>-->
+
+<!--#include file="footer.html" -->
